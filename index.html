@@ -17,19 +17,19 @@
 <body>
     <section id="container">
         <ul id="menu" class="menu_list" style="list-style: none;">
-            <li id="bai_1" class="menu_option">
+            <li id="bai_1" class="menu_option" onclick="showBaiTap1()">
                 <span class="baitap"><i class="fa-solid fa-book" style="margin-right: 10px;"></i>Bài tập 1</span>
             </li>
-            <li id="bai_2" class="menu_option">
+            <li id="bai_2" class="menu_option" onclick="showBaiTap2()">
                 <span class="baitap"><i class="fa-solid fa-book" style="margin-right: 10px;"></i>Bài tập 2</span>
             </li>
-            <li id="bai_3" class="menu_option">
+            <li id="bai_3" class="menu_option" onclick="showBaiTap3()">
                 <span class="baitap"><i class="fa-solid fa-book" style="margin-right: 10px;"></i>Bài tập 3</span>
             </li>
-            <li id="bai_4" class="menu_option">
+            <li id="bai_4" class="menu_option" onclick="showBaiTap4()">
                 <span class="baitap"><i class="fa-solid fa-book" style="margin-right: 10px;"></i>Bài tập 4</span>
             </li>
-            <li id="bai_5" class="menu_option">
+            <li id="bai_5" class="menu_option" onclick="showBaiTap5()">
                 <span class="baitap"><i class="fa-solid fa-book" style="margin-right: 10px;"></i>Bài tập 5</span>
             </li>
             <li id="bai_6" class="menu_option">
@@ -45,21 +45,23 @@
 
         <div id="content" class="main_content">
             <!-- <div class="title" style="margin-bottom: 20px;">
-                <span><i class="fa-solid fa-sort" style="margin-right: 15px;"></i>Sắp xếp theo thứ tự</span>
+                <span><i class="fa-solid fa-venus" style="margin-right: 15px;"></i>Văn mẫu xin lỗi</span>
             </div>
 
-            <div id="show_body_content" class="body_content">
-                <input type="text" placeholder="Nhập số thứ 1" id="bai1_input_1" class="bai1_input">
-                <input type="text" placeholder="Nhập số thứ 2" id="bai1_input_2" class="bai1_input">
-                <input type="text" placeholder="Nhập số thứ 3" id="bai1_input_3" class="bai1_input">
-                <div class="show_buttons">
-                    <span id="btn_body_content_lowtohigh" class="btn_sort">Sắp xếp theo thứ tự tăng dần</span>
-                    <span id="btn_body_content_hightolow" class="btn_sort">Sắp xếp theo thứ tự giảm dần</span>
-                </div>
+            <div id="show_body_content_2" class="body_content_2">
+                <select name="xinloi" id="select_xinloi" class="dropdown_xinloi" style="margin-right: 20px;">
+                    <option selected disabled hidden value="0">Vui lòng chọn 1 câu</option>
+                    <option value="1">Xin lỗi bằng tiếng Anh</option>
+                    <option value="2">Xin lỗi bằng tiếng Nhật</option>
+                    <option value="3">Xin lỗi bằng tiếng Trung</option>
+                    <option value="4">Xin lỗi bằng tiếng Hàn</option>
+                </select>
+                <span id="btn_xinloi">Bắt đầu xin lỗi</span>
             </div>
 
-            <div id="show_body_result" class="body_result">
-                <span id="bai1_result" class="show_bai1_result"><i class="fa-solid fa-arrow-up-1-9"></i></span>
+            <div id="show_body_result_2" class="body_result_2">
+                <i id="icon_sort" class="fa-solid fa-language" style="visibility: visible; font-size: 30px;"></i>
+                <span id="bai2_result" class="show_bai2_result"></span>
             </div> -->
         </div>
     </section>

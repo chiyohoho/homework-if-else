@@ -49,7 +49,13 @@ body .menu_list .menu_option {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-/* ------------Main content--------- */
+body .menu_list .menu_option.active {
+    background: #a298cb;
+    color: #3b4f92;
+}
+
+
+/* ------------Main content Bài 1--------- */
 body #container .main_content .title {
     color: #ed6183;
     font-size: 20px;
@@ -68,6 +74,12 @@ body #container .main_content .body_content .bai1_input {
     margin-right: 10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
+
+body #container .main_content .body_content .bai1_input::-webkit-outer-spin-button,
+body #container .main_content .body_content .bai1_input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
 
 body #container .main_content .body_content .bai1_input:focus {
     border: 2px solid #ed6183;
@@ -96,5 +108,56 @@ body #container .main_content .body_result {
     margin-top: 40px;
     padding: 10px;
     background: rgba(179, 165, 196, 0.6);
+    border-radius: 10px;
+}
+
+/* -------------------------------------------------------------- */
+
+
+/* ------------Main content Bài 2--------- */
+body #container .main_content .body_content_2 .dropdown_xinloi {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+body #container .main_content .body_content_2 .dropdown_xinloi:hover {
+    border: 2px solid #e7879f;
+}
+
+body #container .main_content .body_content_2 .dropdown_xinloi:focus {
+    border: 2px solid #ed6183;
+    border-radius: 5px;
+}
+
+body #container .main_content .body_content_2 #btn_xinloi {
+    padding: 13px;
+    background: skyblue;
+    border-radius: 5px;
+    transition: all 0.2s linear;
+    cursor: pointer;
+}
+
+body #container .main_content .body_content_2 #btn_xinloi:hover {
+    transition: all 0.2s linear;
+    background: rgb(43, 185, 241);
+}
+
+body #container .main_content .body_result_2 {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #a39acb;
+
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
