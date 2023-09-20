@@ -324,7 +324,7 @@ function showBaiTap5() {
                 <input type="number" placeholder="Nhập năm" id="bai1_input_3" class="bai1_input">
                 <div class="show_buttons">
                     <span id="btn_body_content_lowtohigh" class="btn_sort" onclick="timNgayHomQua()">Tìm ngày hôm qua</span>
-                    <span id="btn_body_content_lowtohigh" class="btn_sort" onclick="()">Tìm ngày tiếp theo</span>
+                    <span id="btn_body_content_lowtohigh" class="btn_sort" onclick="timNgayTiepTheo()">Tìm ngày tiếp theo</span>
                 </div>
             </div>
 
@@ -395,9 +395,17 @@ function timNgayHomQua() {
                     day = 31;
                     month = 12;
                     year -= 1;
+                } else if (month === 3) {
+                    if (checkYear) {
+                        day = 29
+                        month = 2
+                    } else {
+                        day = 28
+                        month = 2
+                    }
                 } else {
-                    month -= 1;
-                    day = checkDay;
+                    month -= 1
+                    day = checkDay
                 }
             } else {
                 day -= 1;
@@ -411,14 +419,6 @@ function timNgayHomQua() {
                             month = 12;
                             year -= 1;
                         }
-                    } else {
-                        if (month === 2) {
-                            if (checkYear) {
-                                day = 29;
-                            } else {
-                                day = 28;
-                            }
-                        }
                     }
                 }
             }
@@ -430,4 +430,316 @@ function timNgayHomQua() {
         alert("Vui lòng không để trống 3 ô trên");
     }
 }
+function timNgayTiepTheo() {
+    var day = Number(callElement("#bai1_input_1").value);
+    var month = Number(callElement("#bai1_input_2").value);
+    var year = Number(callElement("#bai1_input_3").value);
+
+    var showResult = callElement("#show_body_result");
+    var result = callElement("#bai5_result");
+
+    var checkYear = false; // year = true = năm nhuận // year = false = năm bình thường
+
+    if (day && month && year) {
+        if (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) {
+            checkYear = true
+        }
+
+        var dayInMonth
+        switch (month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                dayInMonth = 31
+                break
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                dayInMonth = 30
+                break
+            case 2:
+                dayInMonth = checkYear ? 29 : 28
+                break
+            default:
+                dayInMonth = 0
+        }
+        if (dayInMonth === 0 || day < 1 || day > dayInMonth) {
+            if (month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12) {
+                showResult.textContent = `Tháng ${month} của năm ${year} chỉ có 31  ngày`
+            } else if (month === 4 || month === 6 || month === 9 || month === 11) {
+                showResult.textContent = `Tháng ${month} của năm ${year} chỉ có 30  ngày`
+            } else {
+                if (checkYear) {
+                    showResult.textContent = `Tháng ${month} của năm ${year} chỉ có 29  ngày`
+                } else {
+                    showResult.textContent = `Tháng ${month} của năm ${year} chỉ có 28  ngày`
+                }
+            }
+        } else {
+            day += 1
+            if (day === 29 && month === 2 && !checkYear) {
+                day = 1
+                month += 1
+            } else if (day > dayInMonth) {
+                day = 1
+                month += 1
+            }
+
+            if (month > 12) {
+                month = 1
+                year += 1
+            }
+            result.textContent = `Ngày ${day} tháng ${month} năm ${year}`;
+        }
+        showResult.style.visibility = "visible";
+    } else {
+        alert("Vui lòng không để trống 3 ô trên");
+    }
+}
 //-----------------------------//
+
+//--------- BÀI TẬP 6 ---------//
+function showBaiTap6() {
+    var str = `
+    <div class="title" style="margin-bottom: 20px;">
+                <span><i class="fa-solid fa-calendar-days" style="margin-right: 15px;"></i>Tính ngày trong tháng và năm</span>
+            </div>
+
+            <div id="show_body_content" class="body_content">
+                <input type="number" placeholder="Nhập tháng" id="bai1_input_2" class="bai1_input">
+                <input type="number" placeholder="Nhập năm" id="bai1_input_3" class="bai1_input">
+                <div class="show_buttons">
+                    <span id="btn_body_content_lowtohigh" class="btn_sort" onclick="tinhNgay()">Bắt đầu tính</span>
+                </div>
+            </div>
+
+            <div id="show_body_result" class="body_result" style="visibility: hidden">
+                <i id="icon_sort" class="fa-regular fa-hand-point-right" style="visibility: hidden"></i>
+                <span id="bai6_result" class="show_bai6_result"></span>
+            </div>
+    `
+    showContent.innerHTML = str
+}
+function tinhNgay() {
+    var month = Number(callElement("#bai1_input_2").value);
+    var year = Number(callElement("#bai1_input_3").value);
+
+    var showResult = callElement("#show_body_result");
+    var result = callElement("#bai6_result");
+    var showIcon = callElement("#icon_sort")
+
+    var checkYear = false; // year = true = năm nhuận // year = false = năm bình thường
+
+    if (month && year) {
+        //Tính năm nhuận
+        if (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) {
+            checkYear = true;
+        }
+
+        if (month === 4 || month === 6 || month === 9 || month === 11) {
+            result.textContent = `Tháng ${month} của năm ${year} có 30 ngày`;
+        }
+        if (month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12) {
+            result.textContent = `Tháng ${month} của năm ${year} có 31 ngày`;
+        }
+        if (month === 2) {
+            if (checkYear) {
+                result.textContent = `Tháng ${month} của năm ${year} có 29 ngày`;
+            } else {
+                result.textContent = `Tháng ${month} của năm ${year} có 28 ngày`;
+            }
+        }
+        showResult.style.visibility = "visible";
+        showIcon.style.visibility = "visible"
+    } else {
+        alert("Vui lòng không để trống 2 ô trên");
+    }
+}
+//-----------------------------//
+
+//--------- BÀI TẬP 6 ---------//
+function showBaiTap7() {
+    var str = `
+    <div class="title" style="margin-bottom: 20px;">
+                <span><i class="fa-solid fa-calendar-days" style="margin-right: 15px;"></i>Chuyển đổi số thành chữ</span>
+            </div>
+
+            <div id="show_body_content" class="body_content">
+                <input type="number" placeholder="Nhập 3 số bất kỳ" id="bai1_input_3" class="bai1_input">
+                <div class="show_buttons">
+                    <span id="btn_body_content_lowtohigh" class="btn_sort" onclick="transferNumberToString()">Chuyển đổi</span>
+                </div>
+            </div>
+
+            <div id="show_body_result" class="body_result" style="visibility: hidden">
+                <i id="icon_sort" class="fa-regular fa-hand-point-right" style="visibility: hidden"></i>
+                <span id="bai7_result" class="show_bai7_result"></span>
+            </div>
+    `
+    showContent.innerHTML = str
+}
+function transferNumberToString() {
+    var number = Number(callElement("#bai1_input_3").value);
+
+    var showResult = callElement("#show_body_result");
+    var result = callElement("#bai7_result");
+    var showIcon = callElement("#icon_sort")
+
+    if (number) {
+        if (number < 100) {
+            alert("Vui lòng nhập tối thiểu 3 chữ số")
+        } else if (number > 999) {
+            alert("Vui lòng nhập tối đa 3 chữ số")
+        } else {
+            var soHangTram = Math.floor(number / 100)
+            var soHangChuc = Math.floor((number % 100) / 10)
+            var soHangDonVi = Math.floor((number % 100) % 10)
+
+            if (soHangChuc === 0 && soHangDonVi === 0) {
+                switch (soHangTram) {
+                    case 1:
+                        soHangTram = "Một trăm"
+                        break
+                    case 2:
+                        soHangTram = "Hai trăm"
+                        break
+                    case 3:
+                        soHangTram = "Ba trăm"
+                        break
+                    case 4:
+                        soHangTram = "Bốn trăm"
+                        break
+                    case 5:
+                        soHangTram = "Năm trăm"
+                        break
+                    case 6:
+                        soHangTram = "Sáu trăm"
+                        break
+                    case 7:
+                        soHangTram = "Bảy trăm"
+                        break
+                    case 8:
+                        soHangTram = "Tám trăm"
+                        break
+                    case 9:
+                        soHangTram = "Chín trăm"
+                        break
+                }
+                result.textContent = `${soHangTram}`
+            } else if (number === 101) {
+                result.textContent = `Một trăm lẻ một`
+            } else {
+                switch (soHangTram) {
+                    case 1:
+                        soHangTram = "Một trăm"
+                        break
+                    case 2:
+                        soHangTram = "Hai trăm"
+                        break
+                    case 3:
+                        soHangTram = "Ba trăm"
+                        break
+                    case 4:
+                        soHangTram = "Bốn trăm"
+                        break
+                    case 5:
+                        soHangTram = "Năm trăm"
+                        break
+                    case 6:
+                        soHangTram = "Sáu trăm"
+                        break
+                    case 7:
+                        soHangTram = "Bảy trăm"
+                        break
+                    case 8:
+                        soHangTram = "Tám trăm"
+                        break
+                    case 9:
+                        soHangTram = "Chín trăm"
+                        break
+                }
+                switch (soHangChuc) {
+                    case 1:
+                        soHangChuc = "mười"
+                        break
+                    case 2:
+                        soHangChuc = "hai mươi"
+                        break
+                    case 3:
+                        soHangChuc = "ba mươi"
+                        break
+                    case 4:
+                        soHangChuc = "bốn mươi"
+                        break
+                    case 5:
+                        soHangChuc = "năm mươi"
+                        break
+                    case 6:
+                        soHangChuc = "sáu mươi"
+                        break
+                    case 7:
+                        soHangChuc = "bảy mươi"
+                        break
+                    case 8:
+                        soHangChuc = "tám mươi"
+                        break
+                    case 9:
+                        soHangChuc = "chín mươi"
+                        break
+                    default:
+                        soHangChuc = "lẻ"
+                }
+                switch (soHangDonVi) {
+                    case 1:
+                        soHangDonVi = "một"
+                        break
+                    case 2:
+                        soHangDonVi = "hai"
+                        break
+                    case 3:
+                        soHangDonVi = "ba"
+                        break
+                    case 4:
+                        soHangDonVi = "bốn"
+                        break
+                    case 5:
+                        soHangDonVi = "năm"
+                        break
+                    case 6:
+                        soHangDonVi = "sáu"
+                        break
+                    case 7:
+                        soHangDonVi = "bảy"
+                        break
+                    case 8:
+                        soHangDonVi = "tám"
+                        break
+                    case 9:
+                        soHangDonVi = "chín"
+                        break
+                    default:
+                        soHangDonVi = ""
+                        break
+                }
+                if (soHangChuc.length > 5 && soHangDonVi === "một") {
+                    soHangDonVi = "mốt"
+                }
+                result.textContent = `${soHangTram} ${soHangChuc} ${soHangDonVi}`
+            }
+        }
+
+        showResult.style.visibility = "visible"
+        showIcon.style.visibility = "visible"
+
+        // alert("Vui lòng nhập tối thiểu 3 chữ số")
+    } else {
+        alert("Vui lòng không để trống ô trên");
+    }
+}
+//-----------------------------//
+
